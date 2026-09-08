@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id          String   @id @default(uuid())
+  name        String
+  tagline     String?
+  address     String?
+  currency    String   @default("INR")
+  taxRate     Float    @default(5.0) // 5% GST
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tables            RestaurantTable[]
+  categories        MenuCategory[]
+  menuItems         MenuItem[]
+  orders            Order[]
+  adminUsers        AdminUser[]
+  customerSessions  CustomerSession[]
+  tableCalls        TableCall[]
+
+  @@map("restaurants")
+}
+
+model RestaurantTable {
+  id           String   @id @default(uuid())
+  restaurantId String   @default("default-rest-id") @map("restaurant_id")
+  tableNumber  String   @map("table_number")
+  qrToken      String   @unique @map("qr_token")
+  capacity     Int      @default(4)
+  status       String   @default("AVAILABLE") // AVAILABLE, OCCUPIED
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  restaurant       Restaurant       @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orders           Order[]
+  customerSessions CustomerSession[]
+  tableCalls       TableCall[]
+
+  @@unique([restaurantId, tableNumber])
+  @@map("restaurant_tables")
+}
+
+model MenuCategory {
+  id           String     @id @default(uuid())
+  restaurantId String     @default("default-rest-id") @map("restaurant_id")
+  name         String
+  slug         String     @map("slug")
+  displayOrder Int        @default(0) @map("display_order")
+  isActive     Boolean    @default(true) @map("is_active")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  items        MenuItem[]
+
+  @@unique([restaurantId, slug])
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id              String           @id @default(uuid())
+  restaurantId    String           @default("default-rest-id") @map("restaurant_id")
+  categoryId      String           @map("category_id")
+  name            String
+  description     String
+  price           Float
+  costPrice       Float            @default(0.0) @map("cost_price") // Cost field for margin analytics
+  imageUrl        String           @map("image_url")
+  isVeg           Boolean          @default(true) @map("is_veg")
+  isJain          Boolean          @default(false) @map("is_jain")
+  isVegan         Boolean          @default(false) @map("is_vegan")
+  allergensJson   String?          @map("allergens_json") // JSON array of allergen strings e.g. ["Nuts", "Dairy"]
+  isPopular       Boolean          @default(false) @map("is_popular")
+  isAvailable     Boolean          @default(true) @map("is_available")
+  prepTimeMinutes Int              @default(15) @map("prep_time_minutes")
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  restaurant      Restaurant       @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  category        MenuCategory     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  addons          MenuItemAddon[]
+  orderItems      OrderItem[]
+
+  @@map("menu_items")
+}
+
+model MenuItemAddon {
+  id         String   @id @default(uuid())
+  menuItemId String   @map("menu_item_id")
+  name       String
+  price      Float
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@map("menu_item_addons")
+}
+
+model Order {
+  id              String          @id @default(uuid())
+  restaurantId    String          @default("default-rest-id") @map("restaurant_id")
+  orderNumber     String          @map("order_number")
+  tableId         String          @map("table_id")
+  trackingToken   String          @unique @map("tracking_token")
+  customerMobile  String?         @map("customer_mobile") // Captured for reorder & customer segmentation
+  customerName    String?         @map("customer_name")
+  status          String          @default("PLACED") // PLACED, ACCEPTED, PREPARING, READY, SERVED, CANCELLED
+  subtotalAmount  Float           @default(0.0) @map("subtotal_amount")
+  taxesAndCharges Float           @default(40.0) @map("taxes_and_charges")
+  totalAmount     Float           @map("total_amount")
+  paymentStatus   String          @default("PENDING") @map("payment_status") // PENDING, PAID, SPLIT_PAID
+  paymentMethod   String?         @map("payment_method") // UPI, CARD, CASH
+  customerNotes   String?         @map("customer_notes")
+  chefAssigned    String?         @map("chef_assigned")
+  acceptedAt      DateTime?       @map("accepted_at")
+  cookingAt       DateTime?       @map("cooking_at")
+  readyAt         DateTime?       @map("ready_at")
+  servedAt        DateTime?       @map("served_at")
+  feedbackRating  Int?            @map("feedback_rating")
+  feedbackComment String?         @map("feedback_comment")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  restaurant      Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  table           RestaurantTable @relation(fields: [tableId], references: [id], onDelete: Restrict)
+  items           OrderItem[]
+
+  @@unique([restaurantId, orderNumber])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String   @map("order_id")
+  menuItemId  String   @map("menu_item_id")
+  addedByName String?  @map("added_by_name") // Guest name tag for shared table cart
+  quantity    Int      @default(1)
+  unitPrice   Float    @map("unit_price")
+  addonsJson  String?  @map("addons_json")
+  subtotal    Float
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+
+  @@map("order_items")
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  restaurantId String   @default("default-rest-id") @map("restaurant_id")
+  name         String
+  email        String   @map("email")
+  passwordHash String   @map("password_hash")
+  role         String   @default("MANAGER") // ADMIN, MANAGER, CHEF, WAITER
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([restaurantId, email])
+  @@map("admin_users")
+}
+
+model CustomerSession {
+  id           String   @id @default(uuid())
+  restaurantId String   @default("default-rest-id") @map("restaurant_id")
+  tableId      String   @map("table_id")
+  name         String
+  mobile       String
+  partySize    Int      @default(1) @map("party_size")
+  token        String   @unique
+  status       String   @default("ACTIVE") // ACTIVE, CHECKED_OUT, EXPIRED
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  restaurant   Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  table        RestaurantTable @relation(fields: [tableId], references: [id], onDelete: Cascade)
+
+  @@map("customer_sessions")
+}
+
+model TableCall {
+  id           String   @id @default(uuid())
+  restaurantId String   @default("default-rest-id") @map("restaurant_id")
+  tableId      String   @map("table_id")
+  type         String   @default("WAITER") // WAITER, CHECK, CLEANING
+  status       String   @default("PENDING") // PENDING, RESOLVED
+  guestName    String?  @map("guest_name")
+  createdAt    DateTime @default(now()) @map("created_at")
+  resolvedAt   DateTime? @map("resolved_at")
+
+  restaurant   Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  table        RestaurantTable @relation(fields: [tableId], references: [id], onDelete: Cascade)
+
+  @@map("table_calls")
+}
+

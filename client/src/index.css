@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0B0B0E;
+  --bg-surface: #16161A;
+  --bg-surface-2: #1E1E24;
+  --border-subtle: #2A2A30;
+
+  --ember-500: #E8935A;
+  --ember-600: #D4772F;
+  --ember-gradient: linear-gradient(135deg, #FFB86B 0%, #E8935A 40%, #C1531F 100%);
+
+  --gold-highlight: #F2C879;
+
+  --veg-green: #34D399;
+  --nonveg-red: #F0725A;
+  --info-blue: #5EA8E0;
+  --warning-amber: #FBBF54;
+  --success-mint: #4ADE80;
+
+  --text-primary: #F5F1E9;
+  --text-secondary: #A8A29A;
+  --text-muted: #6E6A64;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Manrope', system-ui, sans-serif;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(232, 147, 90, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(242, 200, 121, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(11, 11, 14, 0.6) 0px, transparent 100%);
+    background-attachment: fixed;
+  }
+
+  /* Tabular numerals for stats and prices to prevent jitter */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Glassmorphism token utility */
+.glass-panel {
+  background: rgba(22, 22, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card {
+  background: rgba(30, 30, 36, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-pill {
+  background: rgba(30, 30, 36, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Primary CTA Ember Gradient */
+.btn-ember-primary {
+  background: var(--ember-gradient);
+  color: #0B0B0E;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px -2px rgba(232, 147, 90, 0.35);
+}
+.btn-ember-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 24px -2px rgba(232, 147, 90, 0.5);
+  transform: translateY(-1px);
+}
+.btn-ember-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 10px -2px rgba(232, 147, 90, 0.3);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A30;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8935A;
+}
+
+/* Floating Ember animation */
+@keyframes floatEmber {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(0.4);
+    opacity: 0;
+  }
+}
+.animate-ember-float {
+  animation: floatEmber 3s infinite ease-out;
+}
+
+/* Modal overlay fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.18s ease-out both;
+}
+
+/* Modal panel slide-up */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.animate-slideUp {
+  animation: slideUp 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom styled scrollbar for modal bodies */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2A2A30;
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #E8935A;
+}

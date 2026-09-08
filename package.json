@@ -1,0 +1,13 @@
+{
+  "name": "table-wise-restaurant-ordering-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "db:migrate": "cd server && npx prisma db push",
+    "db:seed": "cd server && npm run seed",
+    "db:studio": "cd server && npx prisma studio",
+    "build": "cd client && npm run build && cd ../server && npm run build"
+  }
+}
