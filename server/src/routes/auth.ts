@@ -5,7 +5,7 @@ import { prisma } from '../lib/prisma';
 import { authenticateAdmin, AuthRequest } from '../middleware/auth';
 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'ember_plate_super_secret_jwt_key_98371982';
+const JWT_SECRET = process.env.JWT_SECRET || 'tablecast_super_secret_jwt_key_98371982';
 
 // POST /api/auth/login
 router.post('/login', async (req: Request, res: Response): Promise<void> => {

@@ -8,7 +8,7 @@ interface AdminLoginPageProps {
 
 export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onBackToCustomer }) => {
   const { login } = useAdminAuth();
-  const [email, setEmail] = useState<string>('admin@emberandplate.com');
+  const [email, setEmail] = useState<string>('admin@tablecast.com');
   const [password, setPassword] = useState<string>('Admin@12345');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onBackToCustomer
   };
 
   const handleFillDemo = () => {
-    setEmail('admin@emberandplate.com');
+    setEmail('admin@tablecast.com');
     setPassword('Admin@12345');
     setError(null);
   };
@@ -52,7 +52,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onBackToCustomer
             <Flame className="w-8 h-8 text-white fill-white animate-pulse" />
           </div>
           <h1 className="text-2xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-400">
-            EMBER & PLATE
+            Tablecast
           </h1>
           <p className="text-xs text-slate-400 mt-1 font-medium">
             Kitchen & Administration Portal
@@ -80,7 +80,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onBackToCustomer
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@emberandplate.com"
+                placeholder="admin@tablecast.com"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-charcoal-900 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500/50"
               />
             </div>

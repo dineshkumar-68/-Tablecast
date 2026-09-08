@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'ember_plate_super_secret_jwt_key_98371982';
+const JWT_SECRET = process.env.JWT_SECRET || 'tablecast_super_secret_jwt_key_98371982';
 
 export interface AuthenticatedUser {
   id: string;

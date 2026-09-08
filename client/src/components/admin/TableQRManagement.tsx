@@ -192,7 +192,7 @@ export const TableQRManagement: React.FC = () => {
                   </div>
                   <div className="text-left">
                     <h4 className="font-serif font-bold text-xs tracking-wider text-text-primary">
-                      EMBER & PLATE
+                      Tablecast
                     </h4>
                     <p className="text-[9px] uppercase tracking-widest text-gold-highlight font-extrabold">
                       TABLE-WISE DINING

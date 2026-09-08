@@ -109,7 +109,7 @@ export const CustomerLoginDashboard: React.FC<CustomerLoginDashboardProps> = ({
           </div>
           <div>
             <h1 className="font-serif tracking-wide text-lg text-amber-100 font-semibold leading-tight">
-              {restaurantInfo.name || 'EMBER & PLATE'}
+              {restaurantInfo.name || 'Tablecast'}
             </h1>
             <p className="text-xs text-amber-500/80 font-medium tracking-wider uppercase">
               Digital Table Portal
@@ -300,7 +300,7 @@ export const CustomerLoginDashboard: React.FC<CustomerLoginDashboardProps> = ({
 
       {/* Footer Branding */}
       <footer className="px-6 py-4 border-t border-stone-900 text-center text-xs text-stone-400 relative z-10">
-        <p>© {new Date().getFullYear()} {restaurantInfo.name || 'EMBER & PLATE'}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {restaurantInfo.name || 'Tablecast'}. All rights reserved.</p>
       </footer>
     </div>
   );

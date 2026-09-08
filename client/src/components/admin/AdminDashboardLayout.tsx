@@ -85,7 +85,7 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
               </div>
               <div>
                 <h1 className="font-serif font-bold text-base tracking-wide text-white leading-tight">
-                  EMBER & PLATE
+                  Tablecast
                 </h1>
                 <p className="text-[10px] uppercase tracking-widest text-orange-400 font-bold">
                   DINE SMART
@@ -135,7 +135,7 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-white truncate">{user?.name || 'Chef Vikram'}</p>
-              <p className="text-[10px] text-slate-400 truncate">{user?.email || 'admin@emberandplate.com'}</p>
+              <p className="text-[10px] text-slate-400 truncate">{user?.email || 'admin@tablecast.com'}</p>
             </div>
           </div>
 

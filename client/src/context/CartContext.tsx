@@ -46,7 +46,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [customerNotes, setCustomerNotes] = useState<string>('');
   const [activeOrder, setActiveOrder] = useState<PlacedOrderSummary | null>(() => {
     try {
-      const saved = localStorage.getItem('ember_active_order');
+      const saved = localStorage.getItem('tablecast_active_order');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -56,9 +56,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Persist active order in local storage
   useEffect(() => {
     if (activeOrder) {
-      localStorage.setItem('ember_active_order', JSON.stringify(activeOrder));
+      localStorage.setItem('tablecast_active_order', JSON.stringify(activeOrder));
     } else {
-      localStorage.removeItem('ember_active_order');
+      localStorage.removeItem('tablecast_active_order');
     }
   }, [activeOrder]);
 

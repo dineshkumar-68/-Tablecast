@@ -145,7 +145,7 @@ function CustomerOrderingView({ onOpenAdmin }: { onOpenAdmin: () => void }) {
           <Sparkles className="w-6 h-6 text-white" />
         </div>
         <p className="text-sm font-medium text-slate-300 animate-pulse">
-          Loading EMBER & PLATE Artisanal Menu...
+          Loading Tablecast Artisanal Menu...
         </p>
       </div>
     );

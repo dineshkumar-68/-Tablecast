@@ -159,7 +159,7 @@ export const KanbanOrderBoard: React.FC = () => {
         </head>
         <body>
           <div class="header">
-            <h2>EMBER & PLATE</h2>
+            <h2>Tablecast</h2>
             <h3>KITCHEN ORDER TICKET (KOT)</h3>
             <p>Order #: <strong>${order.orderNumber}</strong> | ${order.tableNumber}</p>
             <p>Time: ${new Date(order.createdAt).toLocaleTimeString()}</p>

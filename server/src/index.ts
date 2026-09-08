@@ -52,7 +52,7 @@ app.get('/api/health', async (_req: Request, res: Response) => {
     res.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
-      restaurant: restaurant?.name || 'EMBER & PLATE',
+      restaurant: restaurant?.name || 'Tablecast',
       db: {
         connected: true,
         stats: {
@@ -77,7 +77,7 @@ app.get('/api/health', async (_req: Request, res: Response) => {
 // Root welcome route
 app.get('/', (_req: Request, res: Response) => {
   res.json({
-    name: 'EMBER & PLATE REST API',
+    name: 'Tablecast REST API',
     version: '2.0.0',
     endpoints: {
       health: '/api/health',
@@ -92,7 +92,7 @@ app.get('/', (_req: Request, res: Response) => {
 
 // Start Server
 server.listen(PORT, async () => {
-  console.log(`🔥 [EMBER & PLATE] Server running on http://localhost:${PORT}`);
+  console.log(`🔥 [Tablecast] Server running on http://localhost:${PORT}`);
   try {
     await prisma.$connect();
     console.log('📦 Connected to Database successfully (Prisma ORM)');

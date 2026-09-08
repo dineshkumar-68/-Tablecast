@@ -64,7 +64,7 @@ router.get('/:qr_token', async (req: Request, res: Response): Promise<void> => {
       table,
       activeSession: activeSession || null,
       restaurant: restaurant || {
-        name: 'EMBER & PLATE',
+        name: 'Tablecast',
         tagline: 'Artisanal Woodfire & Contemporary Dining',
         currency: 'INR',
         taxRate: 5.0,

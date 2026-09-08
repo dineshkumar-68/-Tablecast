@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center space-x-2">
               <h1 className="font-serif font-bold text-lg sm:text-xl tracking-tight text-stone-100">
-                {restaurant?.name || 'EMBER & PLATE'}
+                {restaurant?.name || 'Tablecast'}
               </h1>
             </div>
             <p className="text-[10px] sm:text-[11px] uppercase tracking-widest text-amber-300/90 font-bold">

@@ -21,14 +21,14 @@ const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefin
 export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [token, setToken] = useState<string | null>(() => {
-    return localStorage.getItem('ember_admin_token');
+    return localStorage.getItem('tablecast_admin_token');
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Validate existing token on mount
   useEffect(() => {
     async function verifySession() {
-      const savedToken = localStorage.getItem('ember_admin_token');
+      const savedToken = localStorage.getItem('tablecast_admin_token');
       if (!savedToken) {
         setIsLoading(false);
         return;
@@ -47,7 +47,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           setToken(savedToken);
         } else {
           // Token expired or invalid
-          localStorage.removeItem('ember_admin_token');
+          localStorage.removeItem('tablecast_admin_token');
           setToken(null);
           setUser(null);
         }
@@ -77,7 +77,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
       setToken(data.token);
       setUser(data.user);
-      localStorage.setItem('ember_admin_token', data.token);
+      localStorage.setItem('tablecast_admin_token', data.token);
       return { success: true };
     } catch (err: any) {
       return { success: false, error: err.message || 'Network error during login' };
@@ -85,7 +85,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   };
 
   const logout = () => {
-    localStorage.removeItem('ember_admin_token');
+    localStorage.removeItem('tablecast_admin_token');
     setToken(null);
     setUser(null);
   };

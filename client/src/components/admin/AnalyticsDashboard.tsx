@@ -124,7 +124,7 @@ export const AnalyticsDashboard: React.FC = () => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `ember_plate_report_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `tablecast_report_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -139,7 +139,7 @@ export const AnalyticsDashboard: React.FC = () => {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Ember & Plate - Analytics Executive Summary</title>
+        <title>Tablecast - Analytics Executive Summary</title>
         <style>
           body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1e293b; padding: 40px; margin: 0; }
           .header { border-bottom: 2px solid #f97316; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
@@ -161,7 +161,7 @@ export const AnalyticsDashboard: React.FC = () => {
       <body>
         <div class="header">
           <div>
-            <h1 class="title">Ember & Plate | Executive Financial Report</h1>
+            <h1 class="title">Tablecast | Executive Financial Report</h1>
             <p class="subtitle">Table-Wise Restaurant Ordering Analytics</p>
           </div>
           <div class="date">Generated: ${new Date().toLocaleString()}</div>
@@ -231,7 +231,7 @@ export const AnalyticsDashboard: React.FC = () => {
         </div>
 
         <div class="footer">
-          Confidential Business Intelligence Document — Ember & Plate Restaurant Operating System
+          Confidential Business Intelligence Document — Tablecast Restaurant Operating System
         </div>
 
         <script>

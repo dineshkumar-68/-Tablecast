@@ -53,7 +53,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onGoToCustomerSite }) 
             </div>
             <div>
               <h1 className="font-serif font-bold text-sm tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-200 to-yellow-400">
-                EMBER & PLATE
+                Tablecast
               </h1>
               <span className="text-[10px] text-orange-400 font-semibold tracking-wider uppercase block">
                 {role} PORTAL

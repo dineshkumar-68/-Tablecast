@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Starting Tenant-Ready EMBER & PLATE database seed...');
+  console.log('🌱 Starting Tenant-Ready Tablecast database seed...');
 
   // 1. Clean existing database records
   await prisma.tableCall.deleteMany({});
@@ -23,7 +23,7 @@ async function main() {
   // 2. Seed Restaurant Profile
   const restaurant = await prisma.restaurant.create({
     data: {
-      name: 'EMBER & PLATE',
+      name: 'Tablecast',
       tagline: 'DINE SMART',
       address: 'Plot 42, Artisanal Culinary Avenue, Gourmet District',
       currency: 'INR',

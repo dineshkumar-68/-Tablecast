@@ -399,7 +399,7 @@ export const TableManagement: React.FC = () => {
                       <Flame className="w-5 h-5 fill-white" />
                     </div>
                     <h4 className="font-serif font-black text-sm tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-400">
-                      EMBER & PLATE
+                      Tablecast
                     </h4>
                     <p className="text-[9px] text-slate-400 uppercase tracking-widest mb-3">
                       Woodfire & Artisanal Dining

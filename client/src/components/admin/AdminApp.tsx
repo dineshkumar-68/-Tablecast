@@ -18,7 +18,7 @@ export const AdminApp: React.FC<AdminAppProps> = ({ onSwitchToCustomer }) => {
           <Flame className="w-6 h-6 text-white" />
         </div>
         <p className="text-xs font-semibold text-slate-300 animate-pulse">
-          Verifying EMBER & PLATE Admin Session...
+          Verifying Tablecast Admin Session...
         </p>
       </div>
     );
