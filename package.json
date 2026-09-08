@@ -8,6 +8,6 @@
     "db:migrate": "cd server && npx prisma db push",
     "db:seed": "cd server && npm run seed",
     "db:studio": "cd server && npx prisma studio",
-    "build": "cd client && npm run build && cd ../server && npm run build"
+    "build": "npm install --prefix client && npm install --prefix server && npm run build --prefix client && npm run build --prefix server"
   }
 }
